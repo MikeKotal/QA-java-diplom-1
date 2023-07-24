@@ -3,6 +3,7 @@ package praktikum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -12,11 +13,11 @@ import static praktikum.helpers.Constants.*;
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
 
-    @Spy
+    @Mock
     Bun bun = new Bun(BUN_NAME, PRICE);
-    @Spy
+    @Mock
     Ingredient ingredientSauce = new Ingredient(IngredientType.SAUCE, SAUCE_NAME, PRICE);
-    @Spy
+    @Mock
     Ingredient ingredientFilling = new Ingredient(IngredientType.FILLING, FILLING_NAME, PRICE);
     @Spy
     Burger burger;
@@ -46,16 +47,17 @@ public class BurgerTest {
     @Test
     public void moveIngredientTest() {
         String message = "Ошибка при перемещении ингредиентов";
+        Mockito.when(ingredientSauce.getType()).thenReturn(IngredientType.SAUCE);
         burger.addIngredient(ingredientSauce);
         burger.addIngredient(ingredientFilling);
         burger.moveIngredient(0, 1);
-        Assert.assertEquals(message, IngredientType.SAUCE, burger.ingredients.get(1).type);
-        Assert.assertEquals(message, SAUCE_NAME, burger.ingredients.get(1).name);
-        Assert.assertEquals(message, PRICE, burger.ingredients.get(1).price, 0);
+        Assert.assertEquals(message, IngredientType.SAUCE, burger.ingredients.get(1).getType());
     }
 
     @Test
     public void getPriceTest() {
+        Mockito.when(bun.getPrice()).thenReturn(100f);
+        Mockito.when(ingredientFilling.getPrice()).thenReturn(100f);
         burger.addIngredient(ingredientFilling);
         burger.setBuns(bun);
         Assert.assertEquals("Расчет стоимости произведен некорректно",
@@ -71,6 +73,10 @@ public class BurgerTest {
                 .append(String.format("= %s %s =%n", "filling", FILLING_NAME))
                 .append(String.format("(==== %s ====)%n", BUN_NAME))
                 .append(String.format("%nPrice: %f%n", 400f));
+        Mockito.when(bun.getName()).thenReturn(BUN_NAME);
+        Mockito.when(bun.getPrice()).thenReturn(100f);
+        Mockito.when(ingredientFilling.getType()).thenReturn(IngredientType.FILLING);
+        Mockito.when(ingredientFilling.getName()).thenReturn(FILLING_NAME);
         burger.addIngredient(ingredientFilling);
         burger.setBuns(bun);
         Mockito.when(burger.getPrice()).thenReturn(400f);
