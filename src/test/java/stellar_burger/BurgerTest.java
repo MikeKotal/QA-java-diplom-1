@@ -1,4 +1,4 @@
-package praktikum;
+package stellar_burger;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static praktikum.helpers.Constants.*;
+import static stellar_burger.helpers.Constants.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {

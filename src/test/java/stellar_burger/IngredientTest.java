@@ -1,10 +1,10 @@
-package praktikum;
+package stellar_burger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import static praktikum.helpers.Constants.PRICE;
-import static praktikum.helpers.Constants.SAUCE_NAME;
+import static stellar_burger.helpers.Constants.PRICE;
+import static stellar_burger.helpers.Constants.SAUCE_NAME;
 
 public class IngredientTest {
 

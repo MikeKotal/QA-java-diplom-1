@@ -1,4 +1,4 @@
-package praktikum.helpers;
+package stellar_burger.helpers;
 
 public interface Constants {
 
@@ -6,5 +6,4 @@ public interface Constants {
     String SAUCE_NAME = "Бодрящий";
     String FILLING_NAME = "Котлетос";
     Float PRICE = 100f;
-
 }
